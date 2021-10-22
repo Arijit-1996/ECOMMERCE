@@ -22,7 +22,7 @@ public class CustomerController {
 		CustCartRepo ccrepo;
 		
 		
-		@PostMapping("/api/add")
+		@PostMapping("/shoppingservice/customer")
 		public Customer addCustomer(@RequestBody Customer newCustomer)
 		{
 	     return service.addcustomer(newCustomer);

@@ -126,7 +126,7 @@ public class CartController {
 	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@PutMapping("/shoppingservice/{custid}/cart")
-//	@CircuitBreaker(name = "CUSTOMERSERVICE", fallbackMethod="getback")
+	@CircuitBreaker(name = "CUSTOMERSERVICE", fallbackMethod="getback")
 	public ResponseEntity updateCart(@PathVariable Integer custid,@RequestBody Cart cart){
 		
 		Map<String,Integer> cu =  rest.getForObject("http://CUSTOMERSERVICE/customer/"+custid, Map.class);
@@ -194,7 +194,7 @@ public class CartController {
 		
 	     ResponseEntity<Map> response=  rest.exchange(res, Map.class);
 	  
-	     CustomerOrder co=new CustomerOrder(cart_o.get().getCartId(),(Integer) response.getBody().get("orderId"));
+	     CustomerOrder co=new CustomerOrder(custid,(Integer) response.getBody().get("orderId"));
 	     
 	     repo3.save(co);
 	  
